@@ -1,6 +1,6 @@
 <h1 align="center"> Tumbuh Kembang </h1>
 <p align="center">
-  An application for parents tracking their children growth and development. Built on top of TypeScript, NestJS framework, and PostgreSQL. Empowered by Google Cloud Platform DevOps.
+  An open source backend application for parents tracking their children development. Built on top of TypeScript, NestJS framework, and PostgreSQL. Empowered by Google Cloud Platform DevOps.
 </p>
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png" width="100" alt="TypeScript" />
@@ -43,12 +43,49 @@ $ npm run test:cov
 
 ## Support
 
-Tumbuh Kembang follows the license of Nest. Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Tumbuh Kembang is an MIT-licensed open source project. To support this project, please give a star and share to whom it may concern.
 
 ## Stay in touch
 
-- Author - [Ahmad Fariz](https://www.lassodev.com)
+1. Author - [Ahmad Fariz](https://www.lassodev.com)
 
 ## License
 
 Tumbuh Kembang is [MIT licensed](LICENSE).
+
+## API Routes
+1. Register
+2. Login
+3. Get my children summary
+4. Get my children list
+5. add a new child
+6. update a child
+7. delete a child and all of the developments
+8. Get details of a child 
+9. add a new development of a child
+10. update a development of a child
+11. delete a development of a child
+
+## Entities
+1. User
+- username: string
+- password: string
+- display_name: string
+- created_at: Date
+- updated_at: Date
+
+2. Child
+- display_name: string
+- dob: Date
+
+3. Development
+- checkpoint_at: Date
+- weight_kg: number
+- height_cm: number
+- development: string[]
+- created_at: Date
+- updated_at: Date
+
+## Entity Relationship Diagram
+- User - Child: 1 to many
+- Child - Development: 1 to many
