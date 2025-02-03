@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 // import { jwtConstants } from './constants';
 import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/decorators/is-public.decorator';
+import { TokenPayloadDto } from './dto/token.dto';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -33,7 +34,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
-      const payload = await this.jwtService.verifyAsync(
+      const payload = await this.jwtService.verifyAsync<TokenPayloadDto>(
         token,
         // {
         //   secret: jwtConstants.secret

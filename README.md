@@ -68,6 +68,7 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 
 ## Entities
 1. User
+- id: string
 - username: string
 - password: string
 - display_name: string
@@ -75,10 +76,12 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 - updated_at: Date
 
 2. Child
+- id: string
 - display_name: string
 - dob: Date
 
 3. Development
+- id: string
 - checkpoint_at: Date
 - weight_kg: number
 - height_cm: number

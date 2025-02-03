@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-export const databaseConfig = (dirname: string) => registerAs(
+export const databaseConfig = () => registerAs(
   'database',
   (): TypeOrmModuleOptions => ({
     type: 'postgres',
@@ -12,7 +12,6 @@ export const databaseConfig = (dirname: string) => registerAs(
     database: process.env.DB_DATABASE ?? 'tumbuh-kembang',
     autoLoadEntities: true,
     synchronize: true,
-    // entities: [dirname + '/../**/*.entity.{js,ts}']
   }),
 )();
 
