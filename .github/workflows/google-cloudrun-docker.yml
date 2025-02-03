@@ -38,8 +38,8 @@ env:
   GCP_PROJECT_ID: '${{ vars.GCP_PROJECT_ID }}' # TODO: update to your Google Cloud project ID
   GCP_REGION: '${{ vars.GCP_REGION }}' # TODO: update to your region
   GCP_RUN_SERVICE: '${{ vars.GCP_RUN_SERVICE }}' # TODO: update to your service name
-  GCP_WORKLOAD_IDENTITY_PROVIDER: '${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}' # TODO: update to your workload identity provider
-  GCP_SERVICE_ACCOUNT: '${{ vars.GCP_SERVICE_ACCOUNT }}'
+  GCP_WORKLOAD_IDENTITY_PROVIDER: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}' # TODO: update to your workload identity provider
+  GCP_SERVICE_ACCOUNT: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
 
 jobs:
   deploy:
