@@ -9,6 +9,7 @@
   <img src="https://static-00.iconduck.com/assets.00/google-cloud-icon-512x412-8rnz6wkz.png" width="100" alt="Google Cloud" />
 </p>
 
+# Development and Testing
 ## Installation
 
 ```bash
@@ -41,6 +42,41 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+# Build and Deploy to local using Docker Compose
+```bash
+$ npm run compose
+```
+
+# Build and Deploy to GCP Cloud Run using GCP Cloud Build from GitHub Actions
+1. commit any changes
+2. if the change is in 'main' branch, push the change to GitHub.
+3. If the change is in other branches, pull request to 'main' branch.
+4. Then wait for the github actions to deploy the app.
+
+# Build and Deploy to GCP Cloud Run using GCP Cloud Build from local
+1. Set up Cloud Build in your GCP project. See [this tutorial](https://cloud.google.com/build/docs/set-up).
+2. Set GCP environment variables
+```bash
+$ export GCP_PROJECT_ID=YOUR_PROJECT_ID
+$ export GCP_REGION=THE_REGION
+```
+
+example:
+```bash
+$ export GCP_PROJECT_ID=YOUR_PROJECT_ID
+$ export GCP_REGION=asia-southeast2
+```
+3. Build/Deploy the containerized application to cloud run 
+```bash
+$ npm run cloudbuild:build
+```
+or
+```bash
+$ npm run cloudbuild:deploy
+```
+
+# Others
+
 ## Support
 
 Tumbuh Kembang is an MIT-licensed open source project. To support this project, please give a star and share to whom it may concern.
@@ -62,9 +98,9 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 6. update a child
 7. delete a child and all of the developments
 8. Get details of a child 
-9. add a new development of a child
-10. update a development of a child
-11. delete a development of a child
+9. [coming soon] add a new development of a child
+10. [coming soon] update a development of a child
+11. [coming soon] delete a development of a child
 
 ## Entities
 1. User

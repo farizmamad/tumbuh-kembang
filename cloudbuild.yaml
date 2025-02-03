@@ -1,0 +1,5 @@
+steps:
+# Deploy image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  script: |
+    gcloud run deploy tumbuh-kembang-backend --image $GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/tumbuh-kembang-backend/tumbuh-kembang-backend:latest --region $GCP_REGION

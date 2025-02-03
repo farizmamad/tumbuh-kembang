@@ -1,0 +1,13 @@
+steps:
+# Build the image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-southeast2-docker.pkg.dev/sublime-bliss-273623/tumbuh-kembang-backend/tumbuh-kembang-backend:latest', '.']
+# Push the image to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-southeast2-docker.pkg.dev/sublime-bliss-273623/tumbuh-kembang-backend/tumbuh-kembang-backend:latest']
+# Deploy image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'tumbuh-kembang-backend', '--image', 'asia-southeast2-docker.pkg.dev/sublime-bliss-273623/tumbuh-kembang-backend/tumbuh-kembang-backend:latest', '--region', 'asia-southeast2']
+images:
+- 'asia-southeast2-docker.pkg.dev/sublime-bliss-273623/tumbuh-kembang-backend/tumbuh-kembang-backend:latest'
