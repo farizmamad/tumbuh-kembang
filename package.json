@@ -9,6 +9,9 @@
     "build": "nest build",
     "build:docker-image": "docker buildx build -f Dockerfile --no-cache .",
     "compose": "rm -rf node_modules & docker compose up --build --detach",
+    "create:artifacts-repo": "gcloud artifacts repositories create tumbuh-kembang-repo --repository-format=docker --location=asia-southeast2 --description=Docker_repository",
+    "deploy:config": "gcloud builds submit --region=asia-southeast2 --config cloudbuild.yaml",
+    "deploy:dockerfile": "gcloud builds submit --tag asia-southeast2-docker.pkg.dev/sublime-bliss-273623/tumbuh-kembang-repo/tumbuh-kembang-backend:latest",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -76,6 +79,9 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
   }
 }

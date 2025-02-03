@@ -7,7 +7,19 @@ describe('UsersService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [UsersService],
-    }).compile();
+    })
+    .useMocker((token) => {
+      if (token === 'UserRepository') {
+        return {
+          create: () => {},
+          find: () => {},
+          findOne: () => {},
+          remove: () => {},
+          save: () => {},
+        };
+      }
+    })
+    .compile();
 
     service = module.get<UsersService>(UsersService);
   });

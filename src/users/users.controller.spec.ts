@@ -9,7 +9,19 @@ describe('UsersController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
-    }).compile();
+    })
+    .useMocker((token) => {
+      if (token === 'UserRepository') {
+        return {
+          create: () => {},
+          find: () => {},
+          findOne: () => {},
+          remove: () => {},
+          save: () => {},
+        };
+      }
+    })
+    .compile();
 
     controller = module.get<UsersController>(UsersController);
   });

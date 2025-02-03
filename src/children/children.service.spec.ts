@@ -7,7 +7,19 @@ describe('ChildrenService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ChildrenService],
-    }).compile();
+    })
+    .useMocker((token) => {
+      if (token === 'ChildRepository') {
+        return {
+          create: () => {},
+          find: () => {},
+          findOne: () => {},
+          remove: () => {},
+          save: () => {},
+        };
+      }
+    })
+    .compile();
 
     service = module.get<ChildrenService>(ChildrenService);
   });

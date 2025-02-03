@@ -14,6 +14,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    // do not use TypeOrmModule.forRootAsync because of the problem in Typeorm.utils dependency: crypto
     TypeOrmModule.forRoot(databaseConfig()),
     UsersModule,
     ChildrenModule,
