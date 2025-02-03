@@ -65,11 +65,11 @@ jobs:
         with:
           username: 'oauth2accesstoken'
           password: '${{ steps.auth.outputs.auth_token }}'
-          registry: '${{ vars.GCP_REGION }}-docker.pkg.dev'
+          registry: '${{ secrets.GCP_REGION }}-docker.pkg.dev'
 
       - name: 'Build and Push Container'
         run: |-
-          DOCKER_TAG="$${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_RUN_SERVICE }}:${{ github.sha }}"
+          DOCKER_TAG="$${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_RUN_SERVICE }}:${{ github.sha }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
       - name: 'Deploy to Cloud Run'
@@ -78,11 +78,11 @@ jobs:
 
         uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
         with:
-          service: '${{ vars.GCP_RUN_SERVICE }}'
-          region: '${{ vars.GCP_REGION }}'
+          service: '${{ secrets.GCP_RUN_SERVICE }}'
+          region: '${{ secrets.GCP_REGION }}'
           # NOTE: If using a pre-built image, update the image name below:
 
-          image: '${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_RUN_SERVICE }}:${{ github.sha }}'
+          image: '${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_RUN_SERVICE }}:${{ github.sha }}'
       # If required, use the Cloud Run URL output in later steps
       - name: 'Show output'
         run: |2-
