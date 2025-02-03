@@ -34,11 +34,6 @@ on:
     branches:
       - main
 
-env:
-  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
-  GCP_REGION: ${{ vars.GCP_REGION }}
-  GCP_RUN_SERVICE: ${{ vars.GCP_RUN_SERVICE }}
-
 jobs:
   deploy:
     runs-on: 'ubuntu-latest'
@@ -59,7 +54,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2'
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          workload_identity_provider: ${{ secrets.GCP_WORKFLOW_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
       # BEGIN - Docker auth and build
@@ -70,11 +65,11 @@ jobs:
         with:
           username: 'oauth2accesstoken'
           password: '${{ steps.auth.outputs.auth_token }}'
-          registry: '${{ env.GCP_REGION }}-docker.pkg.dev'
+          registry: '${{ vars.GCP_REGION }}-docker.pkg.dev'
 
       - name: 'Build and Push Container'
         run: |-
-          DOCKER_TAG="$${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_RUN_SERVICE }}:${{ github.sha }}"
+          DOCKER_TAG="$${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_RUN_SERVICE }}:${{ github.sha }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
       - name: 'Deploy to Cloud Run'
@@ -83,11 +78,11 @@ jobs:
 
         uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
         with:
-          service: '${{ env.GCP_RUN_SERVICE }}'
-          region: '${{ env.GCP_REGION }}'
+          service: '${{ vars.GCP_RUN_SERVICE }}'
+          region: '${{ vars.GCP_REGION }}'
           # NOTE: If using a pre-built image, update the image name below:
 
-          image: '${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_RUN_SERVICE }}:${{ github.sha }}'
+          image: '${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_RUN_SERVICE }}:${{ github.sha }}'
       # If required, use the Cloud Run URL output in later steps
       - name: 'Show output'
         run: |2-
