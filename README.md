@@ -111,11 +111,14 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 - display_name: string
 - created_at: Date
 - updated_at: Date
+- children: Child[]
 
 2. Child
 - id: string
 - display_name: string
 - dob: Date
+- parent: User
+- developments: Development[]
 
 3. Development
 - id: string
@@ -125,6 +128,7 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 - development: string[]
 - created_at: Date
 - updated_at: Date
+- child: Child
 
 ## Entity Relationship Diagram
 - User - Child: 1 to many
