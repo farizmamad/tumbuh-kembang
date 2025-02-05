@@ -55,4 +55,8 @@ export class ChildrenService {
     }
     return await this.childrenRepository.remove(child);
   }
+
+  async validateExistence(parentId: string, id: string) {
+    return await this.childrenRepository.existsBy({ parent: { id: parentId }, id });
+  }
 }

@@ -1,5 +1,6 @@
+import { Development } from 'src/developments/entities/development.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, Index, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity({ name: 'app_child' })
 export class Child {
@@ -21,6 +22,9 @@ export class Child {
   updated_at?: Date;
 
   // relations
-  @ManyToOne(type => User, user => user.children)
+  @ManyToOne(() => User, user => user.children)
   parent: User;
+
+  @OneToMany(() => Development, development => development.child)
+  developments: Development[];
 }

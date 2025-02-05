@@ -98,9 +98,10 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 6. update a child
 7. delete a child and all of the developments
 8. Get details of a child 
-9. [coming soon] add a new development of a child
-10. [coming soon] update a development of a child
-11. [coming soon] delete a development of a child
+9. add a new development of a child
+10. get all developments of a child
+11. update a development of a child
+12. delete a development of a child
 
 ## Entities
 1. User
@@ -128,3 +129,4 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 ## Entity Relationship Diagram
 - User - Child: 1 to many
 - Child - Development: 1 to many
+- User - Development: 1 to many
