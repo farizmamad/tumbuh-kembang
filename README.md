@@ -42,6 +42,8 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+Optionally you can import the postman collection and environment provided in this repository.
+
 # Build and Deploy to local using Docker Compose
 ```bash
 $ npm run compose
@@ -129,6 +131,7 @@ Tumbuh Kembang is [MIT licensed](LICENSE).
 - created_at: Date
 - updated_at: Date
 - child: Child
+- parent: User
 
 ## Entity Relationship Diagram
 - User - Child: 1 to many
